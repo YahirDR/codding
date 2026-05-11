@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/styles.css">
+    <title>Practica CV</title>
+    <div class="cabeza">
+        <img class="background_nombre" 
+        src="../img/background_nombre.gif" 
+        alt="Foto de fondo del nombre">
+        <h1 class="nombre">Juan Yahir Duran Ruíz</h1>
+        
+    </div>
+</head>
+<body class="body">
+    <div class="datos_personales">
+        <!-- Datos -->
+         <div class="dato_personal">
+            <h1>Sobre mi</h1>
+            <label class="sobreMi">Soy egresado de Ingenieria en Sistemas Computacionales del ITSUR. Durante mi formacion desarrolle habilidades en analisis, desarrollo y solucion de problemas, trabajando con tecnologias enfocadas en desarrollo web, programacion y bases de datos.</label>
+         </div>
+         <div class="imagen_contenedor">
+            <a href="https://surguanajuato.tecnm.mx/" target="_blank">
+                <img class="imagen_itsur" 
+                src="../img/imagen_itsur.png"  
+                alt="Foto del itsur">
+            </a>
+         </div>
+    </div>
+        <!-- Software --> 
+    <div class="software">
+            <h2 id="softwareTitle" class="software-titulo" >Conjunto de tecnologías aplicadas en mis proyectos.</h2>
+            <div class="softwares" id="softwareContent">
+                <div class="software_objeto">SQL Server</div>
+                <div class="software_objeto">MySQL</div>
+                <div class="software_objeto">JavaScript</div>
+                <div class="software_objeto">HTML</div>
+                <div class="software_objeto">CSS</div>
+                <div class="software_objeto">GitHub</div>
+                <div class="software_objeto">Python</div>
+            </div>
+    </div>
+    <div class="github"> 
+        <h2 id="githubTitulo" class="github-titulo" onclick="toggleGithub()">Proyectos en GitHub</h2>
+        <div class="github-ocultar" id="githubContenido">
+            <div class="imagen_contenedor_github">
+                <a href="https://github.com/YahirDR" target="_blank">
+                    <img class="imagen_github" src="../img/imagen_github.jpg" alt="Imagen de GitHub">
+                </a>
+            </div>
+            <label class="sobreMi_github" id="githubLabel">En mi perfil de GitHub puedes encontrar mis 
+                proyectos y contribuciones en otros proyectos.</label>
+        </div>
+    </div>
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="social-links">
+                <a href="https://www.linkedin.com/in/juan-yahir-duran-b56462200/" target="_blank" class="social-link">
+                    <img src="../img/logo_linkedin.png" alt="LinkedIn" class="social-img">
+                    <span class="social-name">LinkedIn</span>
+                </a>
+                <a href="https://github.com/YahirDR" target="_blank" class="social-link">
+                    <img src="../img/logo_github.png" alt="GitHub" class="social-img">
+                    <span class="social-name">GitHub</span>
+                </a>
+                <a href="javascript:void(0)" class="social-link" onclick="copiarEmail(event)" >
+                    <span class="social-icon">📧</span>
+                    <span class="social-name">Email</span>
+                </a>
+            </div>
+        </div>
+    </footer>
+</body>
+<script src="../java/comandos.js"></script>
+</html> 

@@ -1,0 +1,255 @@
+body{
+    background-color: black;
+    font-family: Arial, sans-serif;
+    margin: 0;
+}
+.cabeza {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+.nombre {
+    position: absolute;
+    top: 0%;
+    left: 35%;
+    color: white;
+    margin: 0;
+    font-size: 50px;
+}
+.dato_personal {
+    flex: 1;
+    padding-left: 50px;
+    color: rgb(202, 202, 206);
+}
+.sobreMi {
+    display: block;
+    margin-top: 12px;
+    padding: 18px;
+    color: white;
+    font-family: arial, sans-serif;
+    font-size: 30px;
+    font-weight: 500;
+    line-height: 1.8;
+    letter-spacing: 0.2px;
+    text-align: justify;
+}
+.datos_personales {
+    background-color: black;
+    color: white;
+    display: flex;
+    align-items: flex-start;
+}
+.software {
+    background-color: white;
+    margin: 20px 0;
+    padding: 30px 50px 50px;
+}
+.software h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    text-align: center;
+}
+.softwares {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+}
+.software_objeto {
+    background-color: #0d3b66;
+    color: white;
+    text-align: center;
+    padding: 20px 12px;
+    border-radius: 10px;
+    font-weight: times new roman, serif s;
+    box-shadow: 8px 7px 0px 0px rgba(0, 0, 0, 0.5);
+}
+.imagen_github {
+    width: 50%;
+    height: 50%;
+}
+/* Estilos para imagenes */
+.background_nombre {
+    width: 100%;
+    height: 600px;
+    display: block;
+}
+.imagen_contenedor {
+    flex: 1;
+    text-align: center;
+}
+.imagen_itsur {
+    width: 50%;
+    height: 50%;
+}
+.imagen_contenedor_github {
+    flex: 0 0 auto;
+}
+.github-titulo {
+    margin-left: 10px;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.3s ease;
+    color: white;
+    font-size: 20px;
+}
+/* ocultar o seleccionar */
+.github-titulo:hover {
+    font-size: 25px;
+}
+.github-titulo::before {
+    content: "►";
+    display: inline-block;
+    transition: transform 0.3s  ;
+    margin-right: 8px;
+    font-size: 20px;
+}
+.github-titulo.collapsed::before {
+    transform: rotate(+90deg);
+}
+#githubContenido {
+    display: flex;
+    gap: 25px;
+    align-items: center;
+    padding: 20px;
+}
+#githubContenido.github-ocultar {
+    display: none;
+}
+.sobreMi_github {
+    display: block;
+    color: white;
+    font-size: 24px;
+    flex: 1;
+    font-weight: 500;
+    line-height: 1.8;
+    letter-spacing: 0.2px;
+    text-align: justify;
+}
+
+
+
+/* FOOTER STYLES */
+.footer {
+    background-color: #1a1a1a;
+    color: white;
+    padding: 40px 20px;
+    margin-top: 40px;
+    border-top: 2px solid #0d3b66;
+    font-family: Arial, sans-serif;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+.social-link {  
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: white;
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 8px;
+    transition: background 0.2s, transform 0.12s;
+}
+.social-link:hover {
+    background: rgba(255, 255, 255, 0.04);
+    transform: translateY(-2px);
+}
+.social-img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    display: inline-block;
+    margin-bottom: 6px;
+}
+.social-links {
+    
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+}
+
+.social-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: white;
+    transition: all 0.3s ease;
+    width: 120px;
+    height: 120px;
+    box-sizing: border-box;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: rgba(13, 59, 102, 0.3);
+    text-align: center;
+}
+
+.social-link:hover {
+    background-color: #0d3b66;
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(13, 59, 102, 0.5);
+}
+
+.social-icon {
+    font-size: 32px;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.social-name {
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+.contact-info {
+    color: rgb(202, 202, 206);
+    font-size: 14px;
+    line-height: 1.8;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(13, 59, 102, 0.3);
+}
+
+.contact-info p {
+    margin: 8px 0;
+}
+
+.contact-info span {
+    color: white;
+    font-weight: 500;
+}
+
+/* Responsive Footer */
+@media (max-width: 768px) {
+    .social-links {
+        gap: 15px;
+    }
+    
+    .social-link {
+        padding: 10px 12px;
+        width: 100px;
+        height: 100px;
+    }
+    
+    .social-icon {
+        font-size: 28px;
+    }
+    
+    .social-name {
+        font-size: 12px;
+    }
+    
+    .contact-info {
+        font-size: 12px;
+    }
+}
+
+
+
