@@ -27,34 +27,62 @@
                 alt="Foto del itsur">
             </a>
          </div>
+         
     </div>
-        <!-- Software --> 
-    <div class="software">
-            <h2 id="softwareTitle" class="software-titulo" >Conjunto de tecnologías aplicadas en mis proyectos.</h2>
-            <div class="softwares" id="softwareContent">
-                <div class="software_objeto">SQL Server</div>
-                <div class="software_objeto">MySQL</div>
-                <div class="software_objeto">JavaScript</div>
-                <div class="software_objeto">HTML</div>
-                <div class="software_objeto">CSS</div>
-                <div class="software_objeto">GitHub</div>
-                <div class="software_objeto">Python</div>
-            </div>
-    </div>
+    <!-- Inicio de la integracion con la API REST de GitHub -->
     <div class="github"> 
-        <h2 id="githubTitulo" class="github-titulo" onclick="toggleGithub()">Proyectos en GitHub</h2>
-        <div class="github-ocultar" id="githubContenido">
-            <div class="imagen_contenedor_github">
-                <a href="https://github.com/YahirDR" target="_blank">
-                    <img class="imagen_github" src="../img/imagen_github.jpg" alt="Imagen de GitHub">
-                </a>
+        <h2 id="githubTitulo" class="github-titulo">Proyectos en GitHub</h2>
+        <div id="githubContenido">
+        <div class="github_proyectos_contenedor">
+            <label class="sobreMi_github" id="githubLabel">
+                Mis Proyectos universitarios y personales más relevantes en GitHub:
+            </label>
+            
+            <!-- Contenedor donde se cargarán los repositorios -->
+            <div class="github_proyectos_grid" id="githubReposGrid">
+                <!-- Aquí se insertarán los proyectos automáticamente -->
             </div>
-            <label class="sobreMi_github" id="githubLabel">En mi perfil de GitHub puedes encontrar mis 
-                proyectos y contribuciones en otros proyectos.</label>
         </div>
     </div>
+    <!-- Softwares --> 
+    <div class="software">
+            <h2 id="softwareTitle" class="software-titulo collapsed" onclick="toggleSoftware()">Conjunto de tecnologías aplicadas en mis proyectos.</h2>
+            <div class="softwares software-content-hidden" id="softwareContent">
+                <div class="software_objeto">
+                    <img class="software_img" src="../img/logo_sql.png" alt="SQL">
+                    <span>SQL</span>
+                </div>
+                <div class="software_objeto">
+                    <img class="software_img" src="../img/logo_mysql.png" alt="MySQL">
+                    <span>MySQL</span>
+                </div>
+                <div class="software_objeto">
+                    <img class="software_img" src="../img/logo_javascript.png" alt="JavaScript">
+                    <span>JavaScript</span>
+                </div>
+                <div class="software_objeto">
+                    <img class="software_img" src="../img/logo_html.png" alt="HTML">
+                    <span>HTML</span>
+                </div>
+                <div class="software_objeto">
+                    <img class="software_img" src="../img/logo_css.png" alt="CSS">
+                    <span>CSS</span>
+                </div>
+                <div class="software_objeto">
+                    <img class="software_img" src="../img/logo_github.png" alt="GitHub">
+                    <span>GitHub</span>
+                </div>
+                <div class="software_objeto">
+                    <img class="software_img" src="../img/Logo_python.png" alt="Python">
+                    <span>Python</span>
+                </div>
+            </div>
+    </div>
+</body>
+    <!-- pie de pagina --> 
     <footer class="footer">
         <div class="footer-container">
+            <h3>Contáctame:</h3>
             <div class="social-links">
                 <a href="https://www.linkedin.com/in/juan-yahir-duran-b56462200/" target="_blank" class="social-link">
                     <img src="../img/logo_linkedin.png" alt="LinkedIn" class="social-img">
@@ -71,6 +99,5 @@
             </div>
         </div>
     </footer>
-</body>
 <script src="../java/comandos.js"></script>
 </html> 

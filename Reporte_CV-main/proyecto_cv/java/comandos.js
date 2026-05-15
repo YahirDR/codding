@@ -1,4 +1,14 @@
-
+// Variables
+const username = 'YahirDR';
+// Lista de tus proyectos más importantes (cambia los nombres según tus repos)
+const reposImportantes = [
+    "final_project_web2",
+    "analisis_numerico_algoritmos",
+    "ProgramacionWebU2_ProyectoUnidad2",
+    "TI2A-PROGR.MOVIL-I-DRJY"
+   
+];
+//abrir y cerrar seccion de softwares usados en mis proyectos
 function toggleSoftware() {
     const title = document.getElementById('softwareTitle');
     const content = document.getElementById('softwareContent');
@@ -8,16 +18,9 @@ function toggleSoftware() {
         content.classList.toggle('software-content-hidden');
     }
 }
-// Función para mostrar u ocultar el contenido de GitHub
-function toggleGithub() {
-    const title = document.getElementById('githubTitulo');
-    const content = document.getElementById('githubContenido');
-    
-    if (title && content) {
-        title.classList.toggle('collapsed');
-        content.classList.toggle('github-ocultar');
-    }
-}
+document.addEventListener('DOMContentLoaded', function() {
+    cargarReposGitHub();
+});
 
 // Función para copiar email al portapapeles
 function copiarEmail(event) {
@@ -45,24 +48,33 @@ function copiarEmail(event) {
 // ==================== GITHUB API REST ====================
 async function cargarReposGitHub() {
     const grid = document.getElementById('githubReposGrid');
+    if (!grid) return;
 
-    if (!grid) {
-        return;
-    }
-    
-    // Mensaje mientras carga
-    grid.innerHTML = `<p style="grid-column: 1 / -1; text-align: center;">Cargando proyectos...</p>`;
+    grid.innerHTML = `<p style="grid-column: 1 / -1; text-align: center;">Cargando proyectos importantes...</p>`;
 
     try {
-        const response = await fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=6`);
+        //llamada a la API de GitHub para obtener los repositorios del usuario
+        const response = await fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=30`);
         
         if (!response.ok) throw new Error("Error al obtener repositorios");
 
-        const repos = await response.json();
+        const todosLosRepos = await response.json();
 
-        grid.innerHTML = ''; // Limpiar
+        // Filtrar solo los repositorios
+        const reposFiltrados = todosLosRepos.filter(repo => 
+            reposImportantes.includes(repo.name)
+        );
 
-        repos.forEach(repo => {
+        grid.innerHTML = ''; 
+
+        if (reposFiltrados.length === 0) {
+            grid.innerHTML = `<p style="grid-column: 1 / -1; text-align: center; color: orange;">
+                No se encontraron los repositorios seleccionados.
+            </p>`;
+            return;
+        }
+
+        reposFiltrados.forEach(repo => {
             const card = document.createElement('a');
             card.href = repo.html_url;
             card.target = "_blank";
@@ -86,7 +98,7 @@ async function cargarReposGitHub() {
     } catch (error) {
         console.error(error);
         grid.innerHTML = `<p style="grid-column: 1 / -1; color: red; text-align: center;">
-            No se pudieron cargar los proyectos. Inténtalo más tarde.
+            Error al cargar los proyectos. Inténtalo más tarde.
         </p>`;
     }
 }
