@@ -425,3 +425,91 @@ body{
 
 
 
+/* Chat con Llama */
+.llama-chat-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 380px;
+    background: #1e1e2e;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+    overflow: hidden;
+    z-index: 1000;
+    border: 1px solid #3a3a5c;
+    transition: all 0.3s;
+}
+
+.llama-chat-container:not(.expanded) {
+    height: 60px;
+}
+
+.llama-chat-header {
+    background: #2a2a40;
+    color: white;
+    padding: 14px 16px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.chat-status {
+    color: #22c55e;
+    font-size: 14px;
+}
+
+.llama-chat-messages {
+    height: 420px;
+    overflow-y: auto;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: #181824;
+}
+
+.llama-chat-input-area {
+    padding: 12px;
+    background: #1e1e2e;
+    border-top: 1px solid #333;
+    display: flex;
+    gap: 8px;
+}
+
+.llama-chat-input-area input {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: #2a2a40;
+    color: white;
+}
+
+.llama-chat-input-area button {
+    padding: 0 18px;
+    background: #6366f1;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.user-message {
+    align-self: flex-end;
+    background: #4f46e5;
+    color: white;
+    padding: 10px 14px;
+    border-radius: 18px 18px 4px 18px;
+    max-width: 80%;
+}
+
+.llama-message {
+    align-self: flex-start;
+    background: #374151;
+    color: #e5e7eb;
+    padding: 10px 14px;
+    border-radius: 18px 18px 18px 4px;
+    max-width: 80%;
+}

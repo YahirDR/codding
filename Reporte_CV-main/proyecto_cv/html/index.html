@@ -78,6 +78,21 @@
                 </div>
             </div>
     </div>
+    <!-- ==================== CHAT CON LLAMA 3.2 ==================== -->
+<div id="llamaChat" class="llama-chat-container">
+    <div class="llama-chat-header" onclick="toggleChat()">
+        💬 Pregúntame sobre mi portafolio
+        <span id="chatStatus" class="chat-status">● Online</span>
+    </div>
+    
+    <div id="chatMessages" class="llama-chat-messages"></div>
+    
+    <div class="llama-chat-input-area">
+        <input type="text" id="chatInput" placeholder="Ej: ¿Qué tecnologías dominas?" autocomplete="off">
+        <button onclick="enviarMensaje()">Enviar</button>
+    </div>
+</div>
+<!-- ======================================== -->
 </body>
     <!-- pie de pagina --> 
     <footer class="footer">
@@ -100,4 +115,5 @@
         </div>
     </footer>
 <script src="../java/comandos.js"></script>
+<script src="../java/llama.js"></script>
 </html> 
