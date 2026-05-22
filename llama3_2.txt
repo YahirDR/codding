@@ -1,0 +1,4 @@
+-------------------USAR LLAMA 3.2----------------------
+PASO 1: HABILITAR SU USO DESDE EL NAVEGADOR.
+# EN CMD ACTIVAR EL SERVIDOR PARA SER USADO:
+$env:OLLAMA_ORIGINS = "*"; ollama serve
