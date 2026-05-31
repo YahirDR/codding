@@ -1,74 +1,86 @@
-// =============================================
-// LLAMA 3.2 - Chat Inteligente para Portafolio
-// =============================================
+// ========================================================
+// proyecto_cv/java/llama.js
+// Lógica del Chatbot e Interfaz del Portafolio
+// ========================================================
 
-// ===================== CONFIGURACIÓN =====================
-const OLLAMA_URL = "http://localhost:11434/api/chat";   // Dirección donde corre Ollama
-const MODEL_NAME = "llama3.2:3b";                       // Nombre exacto del modelo que tienes instalado
+// Importamos la configuración privada desde el mismo directorio
+import CONFIG from './config.js';
+// Array para almacenar el historial de la conversacion (mensajes del usuario y respuestas de la IA)
+let chatHistory = [];
 
-let chatHistory = [];   // Esta variable guarda toda la conversación (memoria)
-
-// ===================== FUNCIÓN PRINCIPAL =====================
+// ===================== FUNCIÓN PREGUNTAR =====================
 /**
- * Envía el mensaje a Llama 3.2 y devuelve la respuesta
+ * Envía el mensaje del usuario a Groq y devuelve la respuesta de la IA
  */
 async function preguntarLlama(prompt) {
     try {
-        // 1. Guardamos el mensaje del usuario en el historial
+        // 0. Guardamos el mensaje del usuario en el historial
         chatHistory.push({ role: "user", content: prompt });
 
-        // 2. Hacemos la petición a Ollama
-        const response = await fetch(OLLAMA_URL, {
+        // 1. Hacer la petición HTTP a Groq usando el objeto CONFIG importado
+        const response = await fetch(CONFIG.GROQ_URL, {
             method: "POST",
             headers: {
+                // Usar el Header para que groq sepa que estamos autenticados con nuestra API Key
+                "Authorization": `Bearer ${CONFIG.GROQ_API_KEY}`,
+                // Indicamos que estamos enviando datos en formato JSON
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                model: MODEL_NAME,           // Qué modelo usar
+                // Seleccionar el modelo que usamos para nuestra Ia(el más potente disponible en Groq)
+                model: "llama-3.3-70b-versatile",
                 
-                messages: [                  // Historial de mensajes (formato oficial)
+                // Mensajes que se envían al modelo
+                messages: [
                     {
-                        role: "system",      // Instrucciones permanentes para el modelo
-                        content: `Eres un asistente profesional, amigable y entusiasta que representa el portafolio de Juan Yahir Durán Ruíz.
-                                  Eres egresado de Ingeniería en Sistemas Computacionales del ITSUR.
-                                  Responde siempre en español, de forma clara, positiva y profesional.
-                                  No inventes información.`
-                    },
-                    ...chatHistory           // Incluimos toda la conversación anterior
+                        // System prompt: Instrucciones permanentes para definir la personalidad
+                        role: "system",
+                        content: `Eres un asistente profesional, amigable y entusiasta. Tu trabajo es ayudar como ia en el portafolio virtual 
+                                  de Juan Yahir Durán Ruíz. Debes ser una ia enfocada a similar a una secretaria encargada de ayudar a los visitantes del portafolio web, 
+                                  por ello debes de siempre enfocarte en responder dudas acerda de juan Yahir duran ruíz.
+                                  Debes recordar que es egresado de Ingeniería en Sistemas Computacionales del ITSUR (Instituto Tecnológico Superior del Sur de Guanajuato).
+                                  Además de que curse y acreditó 10 el nivel  de ingles en el centro de idiomas (Centro de Lenguas Extranjeras) del ITSUR. Equivalente a un nivel B1 robusto o un B2 (capacidad de mantener conversaciones técnicas, escribir documentación y entender código)
+                                  Las tecnologias y/o softwares que domina son: Java, Python, C#, JavaScript, HTML, CSS, SQL, Github, react y react native (Si es necesario busca información sobre los softwares anteriores y en resumen informa su uso e importancia.). 
+                                  Responde siempre en español y en caso de que saa necesario en ingles, de forma clara, positiva y profesional.
+                                  Ademas de contar con experiencia en reparacion de computadoras, desarrollo de software y desarrollo web.
+                                  En caso de que me quieran contactar mi correo es nopipo22@gmail.com y mi numero de telefono es 4454567886.
+                                  No respondas nada que no tenga que ver con juan yahir duran ruiz, y si no sabes algo, se honesto y di que no lo sabes, pero nunca inventes información.`
+                        },
+                    ...chatHistory           // Incluimos todo el historial para mantener contexto
                 ],
                 
-                stream: false,               // false = esperamos la respuesta completa
-                temperature: 0.7,            // Nivel de creatividad (0.0 = muy preciso, 1.0 = muy creativo)
-                max_tokens: 700              // Máximo de palabras que puede responder
+                temperature: 0.7,    // Nivel de creatividad (0.0 = preciso, 1.0 = muy creativo)
+                max_tokens: 80,      // Máximo de tokens que puede generar en la respuesta
+                stream: false        // false para recibir la respuesta comple
             })
         });
 
-        // Verificamos si hubo error en la conexión
+        // verificar si la respuesta fue exitosa
         if (!response.ok) {
             throw new Error(`Error HTTP: ${response.status}`);
         }
 
-        // Convertimos la respuesta a JSON
+        // transformar la respuesta a formato JSON
         const data = await response.json();
         
-        // Extraemos el texto que respondió Llama
-        const respuesta = data.message.content;
+        // Extraemos el texto de la respuesta (estructura específica de Groq/OpenAI)
+        const respuesta = data.choices[0].message.content;
 
-        // Guardamos la respuesta en el historial para mantener contexto
+        // añadimos con un push la respuesta de la IA en el historial
         chatHistory.push({ role: "assistant", content: respuesta });
 
         return respuesta;
-
+      // En caso de error, lo mostramos en consola y devolvemos un mensaje de error
     } catch (error) {
-        console.error("Error conectando con Ollama:", error);
-        return "❌ No pude conectar con Llama 3.2.\n\nAsegúrate de que Ollama esté corriendo con:\nollama serve";
+        console.error("Error conectando con Groq:", error);
+        return "❌ Hubo un error al conectar con la IA.\n\nPor favor intenta de nuevo en unos momentos.";
     }
 }
 
 // ===================== FUNCIONES DE LA INTERFAZ =====================
 
 /**
- * Agrega un mensaje (usuario o Llama) al chat visualmente
+ * Funcion para agregar un mensaje al contenedor visual del chat
  */
 function agregarMensaje(texto, esUsuario) {
     const messagesContainer = document.getElementById('chatMessages');
@@ -79,7 +91,7 @@ function agregarMensaje(texto, esUsuario) {
     mensajeDiv.textContent = texto;
     
     messagesContainer.appendChild(mensajeDiv);
-    messagesContainer.scrollTop = messagesContainer.scrollHeight; // Baja automáticamente
+    messagesContainer.scrollTop = messagesContainer.scrollHeight; // Auto-scroll hacia abajo
 }
 
 /**
@@ -91,9 +103,9 @@ async function enviarMensaje() {
 
     if (!mensaje) return;
 
-    // Mostrar mensaje del usuario
+    // Mostrar mensaje del usuario en la conversación
     agregarMensaje(mensaje, true);
-    input.value = "";   // Limpiar el input
+    input.value = "";   // Limpiar el campo de texto
 
     // Mostrar indicador "Escribiendo..."
     const loadingId = 'loading-' + Date.now();
@@ -105,19 +117,19 @@ async function enviarMensaje() {
     loadingDiv.textContent = "Escribiendo...";
     messagesContainer.appendChild(loadingDiv);
 
-    // Obtener respuesta de Llama
+    // Obtener respuesta de Groq
     const respuesta = await preguntarLlama(mensaje);
 
     // Eliminar el mensaje "Escribiendo..."
     const loadingElement = document.getElementById(loadingId);
     if (loadingElement) loadingElement.remove();
 
-    // Mostrar respuesta de Llama
+    // Mostrar respuesta de la IA
     agregarMensaje(respuesta, false);
 }
 
 /**
- * Abre o cierra el chat
+ * Abre o cierra el panel del chat
  */
 function toggleChat() {
     const chatContainer = document.getElementById('llamaChat');
@@ -125,6 +137,10 @@ function toggleChat() {
         chatContainer.classList.toggle('expanded');
     }
 }
+
+// Exponer funciones para manejadores inline en index.html
+window.toggleChat = toggleChat;
+window.enviarMensaje = enviarMensaje;
 
 // ===================== INICIALIZACIÓN =====================
 document.addEventListener('DOMContentLoaded', () => {
@@ -145,8 +161,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (messagesContainer && messagesContainer.children.length === 0) {
             const welcome = document.createElement('div');
             welcome.className = 'llama-message';
-            welcome.textContent = "¡Hola! Soy Llama 3.2. Puedes preguntarme sobre los proyectos, tecnologías, experiencia o formación de Juan Yahir.";
+            welcome.textContent = "¡Hola! Soy Lucy una IA trabajando gracias a la api que brinda Groq. ¿En qué te puedo ayudar sobre el portafolio de Duran Ruíz Juan Yahir?";
             messagesContainer.appendChild(welcome);
         }
-    }, 1000);
+    }, 800);
 });

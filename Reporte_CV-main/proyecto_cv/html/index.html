@@ -1,19 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/styles.css">
     <title>Practica CV</title>
-    <div class="cabeza">
-        <img class="background_nombre" 
-        src="../img/background_nombre.gif" 
-        alt="Foto de fondo del nombre">
-        <h1 class="nombre">Juan Yahir Duran Ruíz</h1>
-        
-    </div>
 </head>
 <body class="body">
+
+    <!-- Encabezado corregido dentro del body -->
+    <div class="cabeza">
+        <img class="background_nombre" src="../img/background_nombre.gif" alt="Foto de fondo del nombre">
+        <h1 class="nombre">Juan Yahir Duran Ruíz</h1>
+    </div>
+
     <div class="datos_personales">
         <!-- Datos -->
          <div class="dato_personal">
@@ -22,79 +22,80 @@
          </div>
          <div class="imagen_contenedor">
             <a href="https://surguanajuato.tecnm.mx/" target="_blank">
-                <img class="imagen_itsur" 
-                src="../img/imagen_itsur.png"  
-                alt="Foto del itsur">
+                <img class="imagen_itsur" src="../img/imagen_itsur.png" alt="Foto del itsur">
             </a>
          </div>
-         
     </div>
+
     <!-- Inicio de la integracion con la API REST de GitHub -->
     <div class="github"> 
         <h2 id="githubTitulo" class="github-titulo">Proyectos en GitHub</h2>
         <div id="githubContenido">
-        <div class="github_proyectos_contenedor">
-            <label class="sobreMi_github" id="githubLabel">
-                Mis Proyectos universitarios y personales más relevantes en GitHub:
-            </label>
-            
-            <!-- Contenedor donde se cargarán los repositorios -->
-            <div class="github_proyectos_grid" id="githubReposGrid">
-                <!-- Aquí se insertarán los proyectos automáticamente -->
+            <div class="github_proyectos_contenedor">
+                <label class="sobreMi_github" id="githubLabel">
+                    Mis Proyectos universitarios y personales más relevantes en GitHub:
+                </label>
+                
+                <!-- Contenedor donde se cargarán los repositorios -->
+                <div class="github_proyectos_grid" id="githubReposGrid">
+                    <!-- Aquí se insertarán los proyectos automáticamente -->
+                </div>
+            </div>
+        </div>
+    </div> <!-- Cierre de div github corregido -->
+
+    <!-- Softwares --> 
+    <div class="software">
+        <h2 id="softwareTitle" class="software-titulo collapsed" onclick="toggleSoftware()">Conjunto de tecnologías aplicadas en mis proyectos.</h2>
+        <div class="softwares software-content-hidden" id="softwareContent">
+            <div class="software_objeto">
+                <img class="software_img" src="../img/logo_sql.png" alt="SQL">
+                <span>SQL</span>
+            </div>
+            <div class="software_objeto">
+                <img class="software_img" src="../img/logo_mysql.png" alt="MySQL">
+                <span>MySQL</span>
+            </div>
+            <div class="software_objeto">
+                <img class="software_img" src="../img/logo_javascript.png" alt="JavaScript">
+                <span>JavaScript</span>
+            </div>
+            <div class="software_objeto">
+                <img class="software_img" src="../img/logo_html.png" alt="HTML">
+                <span>HTML</span>
+            </div>
+            <div class="software_objeto">
+                <img class="software_img" src="../img/logo_css.png" alt="CSS">
+                <span>CSS</span>
+            </div>
+            <div class="software_objeto">
+                <img class="software_img" src="../img/logo_github.png" alt="GitHub">
+                <span>GitHub</span>
+            </div>
+            <div class="software_objeto">
+                <img class="software_img" src="../img/Logo_python.png" alt="Python">
+                <span>Python</span>
             </div>
         </div>
     </div>
-    <!-- Softwares --> 
-    <div class="software">
-            <h2 id="softwareTitle" class="software-titulo collapsed" onclick="toggleSoftware()">Conjunto de tecnologías aplicadas en mis proyectos.</h2>
-            <div class="softwares software-content-hidden" id="softwareContent">
-                <div class="software_objeto">
-                    <img class="software_img" src="../img/logo_sql.png" alt="SQL">
-                    <span>SQL</span>
-                </div>
-                <div class="software_objeto">
-                    <img class="software_img" src="../img/logo_mysql.png" alt="MySQL">
-                    <span>MySQL</span>
-                </div>
-                <div class="software_objeto">
-                    <img class="software_img" src="../img/logo_javascript.png" alt="JavaScript">
-                    <span>JavaScript</span>
-                </div>
-                <div class="software_objeto">
-                    <img class="software_img" src="../img/logo_html.png" alt="HTML">
-                    <span>HTML</span>
-                </div>
-                <div class="software_objeto">
-                    <img class="software_img" src="../img/logo_css.png" alt="CSS">
-                    <span>CSS</span>
-                </div>
-                <div class="software_objeto">
-                    <img class="software_img" src="../img/logo_github.png" alt="GitHub">
-                    <span>GitHub</span>
-                </div>
-                <div class="software_objeto">
-                    <img class="software_img" src="../img/Logo_python.png" alt="Python">
-                    <span>Python</span>
-                </div>
-            </div>
+
+    <!-- ==================== CHAT CON LLAMA 3.3 ==================== -->
+    <div id="llamaChat" class="llama-chat-container">
+        <div class="llama-chat-header" onclick="toggleChat()">
+            💬 Pregúntame sobre mi portafolio
+            <span id="chatStatus" class="chat-status">● Online</span>
+        </div>
+        
+        <div id="chatMessages" class="llama-chat-messages"></div>
+        
+        <div class="llama-chat-input-area">
+            <input type="text" id="chatInput" placeholder="Ej: ¿Qué tecnologías dominas?" autocomplete="off">
+            <button onclick="enviarMensaje()">Enviar</button>
+        </div>
     </div>
-    <!-- ==================== CHAT CON LLAMA 3.2 ==================== -->
-<div id="llamaChat" class="llama-chat-container">
-    <div class="llama-chat-header" onclick="toggleChat()">
-        💬 Pregúntame sobre mi portafolio
-        <span id="chatStatus" class="chat-status">● Online</span>
-    </div>
-    
-    <div id="chatMessages" class="llama-chat-messages"></div>
-    
-    <div class="llama-chat-input-area">
-        <input type="text" id="chatInput" placeholder="Ej: ¿Qué tecnologías dominas?" autocomplete="off">
-        <button onclick="enviarMensaje()">Enviar</button>
-    </div>
-</div>
-<!-- ======================================== -->
-</body>
-    <!-- pie de pagina --> 
+    <!-- ======================================== -->
+
+    <!-- pie de pagina resguardado dentro del body --> 
     <footer class="footer">
         <div class="footer-container">
             <h3>Contáctame:</h3>
@@ -107,13 +108,18 @@
                     <img src="../img/logo_github.png" alt="GitHub" class="social-img">
                     <span class="social-name">GitHub</span>
                 </a>
-                <a href="javascript:void(0)" class="social-link" onclick="copiarEmail(event)" >
+                <a href="javascript:void(0)" class="social-link" onclick="copiarEmail(event)">
                     <span class="social-icon">📧</span>
                     <span class="social-name">Email</span>
                 </a>
             </div>
         </div>
     </footer>
-<script src="../java/comandos.js"></script>
-<script src="../java/llama.js"></script>
-</html> 
+
+    <!-- LLAMADOS DE SCRIPTS CORREGIDOS -->
+    <script src="../java/comandos.js"></script>
+    <!-- Se deja un único script tipo module apuntando a la ruta correspondiente relativa -->
+    <script type="module" src="../java/llama.js"></script>
+
+</body>
+</html>
